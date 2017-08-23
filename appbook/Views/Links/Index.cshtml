@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MVCdemo.Models.Links>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br /> 
+ <h1>Links</h1>
+@if (ViewBag.AppName != null)
+{
+<h4 class="well "><b>Application Name:</b>  @ViewBag.AppName </h4> 
+}
+<p>
+    @Html.ActionLink("New Link", "Create", null, htmlAttributes: new { @class = "btn btn-primary btn-sm pull-right " })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Application.AppName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LinkType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Link)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+      
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Application.AppName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LinkType)
+          
+        
+        </td>
+        <td class="col-lg-3  ">
+            @Html.DisplayFor(modelItem => item.Link)
+            <a href="@Html.DisplayFor(modelItem => item.Link)"  target="_blank" title="Click here" class=" glyphicon  glyphicon-link" > </a> 
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LinkId }, htmlAttributes: new { @class = "btn btn-primary btn-sm" })  
+            @Html.ActionLink("Details", "Details", new { id=item.LinkId }, htmlAttributes: new { @class = "btn btn-info btn-sm" }) 
+            @Html.ActionLink("Delete", "Delete", new { id=item.LinkId }, htmlAttributes: new { @class = "btn btn-danger btn-sm" })
+        </td>
+    </tr>
+}
+
+</table>
+ 
+<div>
+    @if (Session["appid"] == null || Session["env"] == null)
+    { @Html.ActionLink("Back to List", "Index", "Environments")
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "Index", "Environments", new { app_id = Convert.ToInt32(Session["appid"].ToString()), env = Session["env"].ToString() }, null)
+    }
+</div>

@@ -1,0 +1,80 @@
+﻿@model MVCdemo.Models.Environment
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Environment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Application.AppName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Application.AppName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArchDiagramPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArchDiagramPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinksParameter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinksParameter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServerParameter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServerParameter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DBServerParameter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DBServerParameter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileShareParameter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileShareParameter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnvType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnvType)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index", new { app_id = Model.AppId, env = Model.EnvType })
+        </div>
+    }
+</div>

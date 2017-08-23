@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MVCdemo.Models.Application>
+
+@{
+    ViewBag.Title = "Application Info";
+}
+
+<h2>Application List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create",null, htmlAttributes:new  {@class= "btn btn-primary btn-sm pull-right " })
+</p>
+<br /><br /> 
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppOwner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateModified)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>   @Html.ActionLink("Details", "Details", new { id = item.AppId }, htmlAttributes: new { @class = "btn btn-success btn-sm  " })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppOwner)
+        </td>
+        <td>
+             @Html.DisplayFor(modelItem => item.AppDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateModified)
+        </td>
+        <td>
+            @Html.ActionLink("Dev", "Dev", new { id=item.AppId }, htmlAttributes: new { @class = "btn btn-warning btn-sm" })  @Html.ActionLink("ITG", "ITG", new { id = item.AppId }, htmlAttributes: new { @class = "btn btn-info btn-sm" })   @Html.ActionLink("Prod", "Prod", new { id = item.AppId }, htmlAttributes: new { @class = "btn btn-danger btn-sm" })  
+           
+       
+        </td>
+    </tr>
+}
+
+</table>

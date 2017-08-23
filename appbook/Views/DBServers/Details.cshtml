@@ -1,0 +1,99 @@
+﻿@model MVCdemo.Models.DBServer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DBServer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Application.AppName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Application.AppName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DbserverName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DbserverName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DbserverVersion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DbserverVersion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DbuserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DbuserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dbpassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dbpassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DbserverSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DbserverSize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DbserverEnv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DbserverEnv)
+        </dd>
+
+      
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DbserverID }) |
+    @if (Session["appid"] == null || Session["env"] == null)
+    { @Html.ActionLink("Back to List", "Index")
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "Index", new { app_id = Convert.ToInt32(Session["appid"].ToString()), env = Session["env"].ToString() })
+
+    }
+</p>
