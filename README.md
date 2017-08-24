@@ -1,3 +1,3 @@
 # AppBook
 
-This repository contains MVC AppBook code 
+This is main repository considered as Live production code
