@@ -1,0 +1,74 @@
+﻿@model IEnumerable<MVCdemo.Models.Environment>
+
+@{
+    ViewBag.Title = "App Info";
+}
+<h1>Application Overview</h1>
+<br /> 
+@if (ViewBag.AppName != null)
+ {
+<h4 class="well" style="text-transform: capitalize;"><b>Application Name:</b>  @ViewBag.AppName </h4> 
+ }
+<p>
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-primary btn-sm pull-right " })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Application.AppName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArchDiagramPath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LinksParameter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServerParameter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DBServerParameter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileShareParameter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnvType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td >
+            <span class="glyphicon glyphicon-bell" style="color:navy;"></span> <b style="text-transform: capitalize;color:crimson;font-weight:bolder;">@Html.DisplayFor(modelItem => item.Application.AppName)</b>
+        </td>
+        <td> 
+            @Html.ActionLink("View ", "DisplayFile", "FileUpload", new { filename = @Html.DisplayFor(modelItem => item.ArchDiagramPath) }, new { @class = "ui-btn-right", @target = "_blank" })
+
+        </td>
+        <td>
+
+            <img src="~/img/url.png" width="25px" height="25px" />   @Html.ActionLink("Links", "Index", "Links", new { app_id = @ViewBag.appid, env = @Html.DisplayFor(modelItem => item.ServerParameter) }, new { @class = "ui-btn-right", @title = "Hooray!" })
+
+        </td>
+        <td>
+            <img src="../img/server.ico" width="25px" height="25px" /> @Html.ActionLink("Servers", "Index", "Servers", new { app_id = item.AppId, env = item.ServerParameter }, new { @class = "ui-btn-right" })
+
+        </td>
+        <td>
+            <img src="../img/db.ico" width="25px" height="25px" />  @Html.ActionLink("DBServers", "Index", "DBServers", new { app_id = item.AppId, env = item.ServerParameter }, new { @class = "ui-btn-right" })
+
+        </td>
+        <td>
+            <img src="../img/fileshare.png" width="25px" height="25px" />    @Html.DisplayFor(modelItem => item.FileShareParameter)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.EnvID,   app_id = item.AppId, env = item.EnvType }, htmlAttributes: new { @class = "btn btn-info btn-sm" })
+            @Html.ActionLink("Edit", "Edit", new { id = item.EnvID, app_id = item.AppId, env = item.EnvType }, htmlAttributes: new { @class = "btn btn-warning btn-sm" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.EnvID , app_id = item.AppId, env = item.EnvType }, htmlAttributes: new { @class = "btn btn-danger btn-sm" })
+        </td>
+    </tr>
+}
+
+</table>

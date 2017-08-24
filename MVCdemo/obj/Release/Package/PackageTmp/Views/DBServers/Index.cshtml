@@ -1,0 +1,90 @@
+﻿@model IEnumerable<MVCdemo.Models.DBServer>
+
+@{
+    ViewBag.Title = "App Info";
+}
+<h1>Database Server Details</h1>
+<br /> 
+
+
+@if (ViewBag.AppName != null)
+{<h4 class="well" style="text-transform: capitalize;"><b>Application Name:</b>  @ViewBag.AppName </h4> 
+}
+<p>
+    @Html.ActionLink("New DB Server", "Create", null, htmlAttributes: new { @class = "btn btn-primary btn-sm pull-right " })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Application.AppName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DbserverName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DbserverVersion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DbuserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dbpassword)
+        </th>
+   
+        <th>
+            @Html.DisplayNameFor(model => model.DbserverSize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DbserverEnv)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Application.AppName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DbserverName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DbserverVersion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DbuserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dbpassword)
+        </td>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.DbserverSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DbserverEnv)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Connect", "ConnectSQL", new { ServerName = item.DbserverName, Username=item.DbuserName }, htmlAttributes: new { @target = "_blank", @class = "btn btn-primary btn-sm" })
+            @Html.ActionLink("Edit", "Edit", new { id=item.DbserverID }, htmlAttributes: new { @class = "btn btn-primary btn-sm" })  
+            @Html.ActionLink("Details", "Details", new { id=item.DbserverID }, htmlAttributes: new { @class = "btn btn-info btn-sm" }) 
+            @Html.ActionLink("Delete", "Delete", new { id=item.DbserverID }, htmlAttributes: new { @class = "btn btn-danger btn-sm" })
+        </td>
+    </tr>
+  
+}
+  
+</table>
+
+<div>
+
+    @if (Session["appid"] == null || Session["env"] == null)
+    { @Html.ActionLink("Back to List", "Index", "Environments")
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "Index", "Environments", new { app_id = Convert.ToInt32(Session["appid"].ToString()), env = Session["env"].ToString() }, null)
+    }
+ </div>
