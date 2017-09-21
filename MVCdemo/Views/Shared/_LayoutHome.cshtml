@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title-Software information</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top"  >
+        <div class="container">
+            <div class="navbar-header ">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="logo">
+                    <img src="~/img/appbook.png" height="40px" width="40px" class="logo" />
+                    <b>
+
+                        @Html.ActionLink("AppBook", "Index", "Home", new { area = "" }, new { @class = "navbar-brand pull-right " })
+                    </b>
+                </div>
+              </div>
+            <div class="navbar-collapse collapse" >
+               
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" >
+        @RenderBody()
+        <hr />
+     
+    </div>
+   
+    <div class="navbar navbar-inverse navbar-fixed-bottom"  >
+        <div class="container">
+            
+                <p class=" navbar-brand "  >&copy; @DateTime.Now.Year - Designed by Kashinath Patil</p>
+        
+        </div>
+    </div>
+  
+  
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

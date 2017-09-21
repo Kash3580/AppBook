@@ -5,6 +5,48 @@
 }
 <h1>Database Server Details</h1>
 <br /> 
+ 
+   
+ @{ bool flag = false; string path = ""; }
+ @if(File.Exists(@"C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\Ssms.exe"))
+ {
+     flag= true;
+ }
+ else if (File.Exists(@"C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\ManagementStudio\Ssms.exe"))
+ {
+    flag= true;
+ }
+ else if (File.Exists(@"C:\Program Files\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\Ssms.exe"))
+ {
+    flag= true;
+ }
+ else if (File.Exists(@"C:\Program Files\Microsoft SQL Server\100\Tools\Binn\ManagementStudio\Ssms.exe"))
+ {
+    flag= true;
+ }
+ else  
+ {
+    flag= false;
+ }
+@if (flag == false)
+{
+   <script>
+       alert('SQL server management Studio is not installed on your machine or not identified path');
+   </script>
+}
+else
+{
+    <script>
+
+        windows.location.href =  "file:///C:/Program Files (x86)/Microsoft SQL Server/120/Tools/Binn/ManagementStudio/Ssms.exe";
+    </script>
+    path = @"C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\Ssms.exe";
+   
+}
+ 
+
+
+
 
 
 @if (ViewBag.AppName != null)
@@ -67,7 +109,7 @@
         </td>
         
         <td>
-            @Html.ActionLink("Connect", "ConnectSQL", new { ServerName = item.DbserverName, Username=item.DbuserName }, htmlAttributes: new { @target = "_blank", @class = "btn btn-primary btn-sm" })
+            @Html.ActionLink("Connect", "ConnectSQL", new { pathEXE = path, Username=item.DbuserName }, htmlAttributes: new { @target = "_blank", @class = "btn btn-primary btn-sm" })
             @Html.ActionLink("Edit", "Edit", new { id=item.DbserverID }, htmlAttributes: new { @class = "btn btn-primary btn-sm" })  
             @Html.ActionLink("Details", "Details", new { id=item.DbserverID }, htmlAttributes: new { @class = "btn btn-info btn-sm" }) 
             @Html.ActionLink("Delete", "Delete", new { id=item.DbserverID }, htmlAttributes: new { @class = "btn btn-danger btn-sm" })

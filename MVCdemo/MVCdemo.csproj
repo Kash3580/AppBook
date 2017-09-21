@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.Core.3.3.17\lib\net45\AWSSDK.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AWSSDK.S3, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.S3.3.3.10.1\lib\net45\AWSSDK.S3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -164,41 +172,54 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\DBServersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\EnvironmentsController.cs" />
+    <Compile Include="Controllers\FileSharesController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinksController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ServersController.cs" />
-    <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\devEnvironment.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\DBServer .cs" />
+    <Compile Include="Models\FileShare.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Links.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Server.cs" />
-    <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap - flatly.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min - flatly.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\appbook.png" />
+    <Content Include="img\bg.png" />
     <Content Include="img\db.ico" />
+    <Content Include="img\down.jpg" />
     <Content Include="img\fileshare.png" />
     <Content Include="img\server.ico" />
     <Content Include="img\server.png" />
     <Content Include="img\shared-server_icon-icons.com_52816.png" />
+    <Content Include="img\up.jpg" />
     <Content Include="img\url.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -238,11 +259,6 @@
     <Content Include="Views\Applications\Edit.cshtml" />
     <Content Include="Views\Applications\Index.cshtml" />
     <Content Include="Views\FileUpload\UploadFile.cshtml" />
-    <Content Include="Views\Students\Create.cshtml" />
-    <Content Include="Views\Students\Delete.cshtml" />
-    <Content Include="Views\Students\Details.cshtml" />
-    <Content Include="Views\Students\Edit.cshtml" />
-    <Content Include="Views\Students\Index.cshtml" />
     <Content Include="Views\Links\Create.cshtml" />
     <Content Include="Views\Links\Delete.cshtml" />
     <Content Include="Views\Links\Details.cshtml" />
@@ -265,6 +281,35 @@
     <Content Include="Views\Servers\Edit.cshtml" />
     <Content Include="Views\Servers\Index.cshtml" />
     <Content Include="Views\Servers\ConnectRDP.cshtml" />
+    <Content Include="Views\FileUpload\DisplayFile.cshtml" />
+    <Content Include="Views\FileShares\Create.cshtml" />
+    <Content Include="Views\FileShares\Delete.cshtml" />
+    <Content Include="Views\FileShares\Details.cshtml" />
+    <Content Include="Views\FileShares\Edit.cshtml" />
+    <Content Include="Views\FileShares\Index.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\_LayoutHome.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -277,6 +322,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\AWSSDK.S3.3.3.10.1\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

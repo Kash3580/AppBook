@@ -105,6 +105,7 @@ namespace MVCdemo.Models
         public ICollection<Environment> Environments { get; set; }
         public ICollection<DBServer> DBServers { get; set; }
         public ICollection<Server> Servers { get; set; }
+        public ICollection<FileShare> FileShares { get; set; }
     }
     public class ApplicationDBContext:DbContext
     {
@@ -120,6 +121,7 @@ namespace MVCdemo.Models
         public System.Data.Entity.DbSet<MVCdemo.Models.Environment> Environments { get; set; }
         public System.Data.Entity.DbSet<MVCdemo.Models.DBServer> DBServer { get; set; }
         public System.Data.Entity.DbSet<MVCdemo.Models.Server> Server { get; set; }
+        public System.Data.Entity.DbSet<MVCdemo.Models.FileShare> FileShare { get; set; }
     }
 
 

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVCdemo.Models;
 using System.Diagnostics;
+using System.Text;
 
 namespace MVCdemo.Controllers
 {
@@ -188,20 +189,24 @@ namespace MVCdemo.Controllers
             }
         }
 
-        public ActionResult ConnectSQL(string ServerName, string Username)
+        public ActionResult ConnectSQL(string pathEXE, string Username)
         {
-            Process rdcProcess = new Process();
+            //Process rdcProcess = new Process();
 
-            string executable = System.Environment.ExpandEnvironmentVariables(@"C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\Ssms.exe");
-            if (executable != null)
-            {
+            //string executable = System.Environment.ExpandEnvironmentVariables(@"C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\Ssms.exe");
+            //if (executable != null)
+            //{
 
-                rdcProcess.StartInfo.FileName = executable;
-                rdcProcess.StartInfo.Arguments = " -S " + ServerName+ " -U "+ Username;   
-                rdcProcess.Start();
+            //    rdcProcess.StartInfo.FileName = executable;
+            //    rdcProcess.StartInfo.Arguments = " -S " + ServerName+ " -U "+ Username;   
+            //    rdcProcess.Start();
 
-            }
-            return View();
+            //}
+            //return View();
+         
+                 return File(pathEXE,System.Net.Mime.MediaTypeNames.Application.Octet);
+             
+
         }
 
         protected override void Dispose(bool disposing)

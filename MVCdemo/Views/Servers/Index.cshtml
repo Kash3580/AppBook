@@ -7,7 +7,7 @@
 <h2>Server List</h2>
 @if (ViewBag.AppName != null)
 {
-<h4 class="well "><b>Application Name:</b>  @ViewBag.AppName </h4>
+<h4 class="well"><b>Application Name:</b>  @ViewBag.AppName </h4>
 }
 <p>
     @Html.ActionLink("New Server", "Create", null, htmlAttributes: new { @class = "btn btn-primary btn-sm pull-right " })
@@ -64,7 +64,7 @@
             @Html.DisplayFor(modelItem => item.ServerEnv)
         </td>
         <td>
-            @Html.ActionLink("Connect", "ConnectRDP", new { ServerName = item.ServerName }, htmlAttributes: new { @target = "_blank", @class = "btn btn-primary btn-sm" })
+            @Html.ActionLink("Connect", "ConnectRDP", new { ServerName = item.ServerName, username = item.UserName, password = item.Password }, htmlAttributes: new { @target = "_blank", @class = "btn btn-primary btn-sm" })
 
 
             @Html.ActionLink("Edit", "Edit", new { id = item.ServerID }, htmlAttributes: new { @class = "btn btn-primary btn-sm" })

@@ -7,9 +7,12 @@
 <h2>Application List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create",null, htmlAttributes:new  {@class= "btn btn-primary btn-sm pull-right " })
-</p>
-<br /><br /> 
+    @Html.ActionLink("Add Application", "Create",null, htmlAttributes:new  {@class= "btn btn-primary btn-sm pull-right " })
+</p> 
+
+   
+
+<br /><br />
 <table class="table">
     <tr>
         <th></th>
@@ -51,9 +54,9 @@
             @Html.DisplayFor(modelItem => item.DateModified)
         </td>
         <td>
-            @Html.ActionLink("Dev", "Dev", new { id=item.AppId }, htmlAttributes: new { @class = "btn btn-warning btn-sm" })  @Html.ActionLink("ITG", "ITG", new { id = item.AppId }, htmlAttributes: new { @class = "btn btn-info btn-sm" })   @Html.ActionLink("Prod", "Prod", new { id = item.AppId }, htmlAttributes: new { @class = "btn btn-danger btn-sm" })  
+            @Html.ActionLink("Dev", "Dev", new { id=item.AppId }, htmlAttributes: new { @class = "btn btn-warning btn-sm" })  @Html.ActionLink("ITG", "ITG", new { id = item.AppId }, htmlAttributes: new { @class = "btn btn-info btn-sm" })   @Html.ActionLink("Prod", "Prod", new { id = item.AppId }, htmlAttributes: new { @class = "btn btn-danger btn-sm" })
+ 
            
-       
         </td>
     </tr>
 }

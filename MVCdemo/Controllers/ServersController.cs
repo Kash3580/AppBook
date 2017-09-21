@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using MVCdemo.Models;
 using System.Diagnostics;
+using System.IO;
+using System.Text;
 
 namespace MVCdemo.Controllers
 {
@@ -194,20 +196,35 @@ namespace MVCdemo.Controllers
             }
         }
 
-        public ActionResult ConnectRDP(string ServerName)
+        public ActionResult ConnectRDP(string ServerName,string username, string password)
         {
-            Process rdcProcess = new Process();
+            //Process rdcProcess = new Process();
 
-            string executable = System.Environment.ExpandEnvironmentVariables(@"%SystemRoot%\system32\mstsc.exe");
-            if (executable != null)
+            //string executable = System.Environment.ExpandEnvironmentVariables(@"%SystemRoot%\system32\mstsc.exe");
+            //if (executable != null)
+            //{
+
+            //    rdcProcess.StartInfo.FileName = executable;
+            //    rdcProcess.StartInfo.Arguments = "/v " + "UAS-P-GEN-RDS-2" + " /prompt"; ;  // ip or name of computer to connect
+            //    rdcProcess.Start();
+
+            //}
+
+
+            Response.Clear();
+
+            using (StreamWriter stream = new StreamWriter(Response.OutputStream, new UTF8Encoding(false)))
             {
-
-                rdcProcess.StartInfo.FileName = executable;
-                rdcProcess.StartInfo.Arguments = "/v " + "UAS-P-GEN-RDS-2" + " /prompt"; ;  // ip or name of computer to connect
-                rdcProcess.Start();
-
+              //  string data = "auto connect:i:1\nfull address: s:UAS-P-GEN-RDS-2\nusername: s:kpatil@uabrands.in\npassword: s:Welcome11";
+        //   string data1="auto connect:i:1\nfull address: s:"+ServerName+"\nusername: s:"+username+"\npassword: s:"+password;
+             //   stream.Write("auto connect:i:1\nfull address: s:UAS-P-GEN-RDS-2\nusername: s:kpatil@uabrands.in\npassword: s:Welcome11");
+              //  Response.AddHeader("Content-disposition", "attachment;filename=UAS-P-GEN-RDS-2.rdp");
+               // Response.Flush();
+              //  Response.End();
             }
-            return View();
+            string data = "auto connect:i:1\nfull address: s:" + ServerName + "\nusername: s:" + username + "\npassword: s:" + password;
+            return File(Encoding.UTF8.GetBytes(data), System.Net.Mime.MediaTypeNames.Application.Octet, ServerName+".rdp");
+
         }
         protected override void Dispose(bool disposing)
         {

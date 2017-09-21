@@ -1,0 +1,90 @@
+﻿@model MVCdemo.Models.FileShare
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FileShare</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Application.AppName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Application.AppName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileSharePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileSharePath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileShareType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileShareType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PasswordExpiryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PasswordExpiryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnvType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnvType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FileShareId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

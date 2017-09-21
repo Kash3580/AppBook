@@ -19,6 +19,7 @@ namespace MVCdemo.Controllers
         {
             return View(db.Applications.ToList());
         }
+            
 
         // GET: Applications/Details/5
         public ActionResult Details(int? id)

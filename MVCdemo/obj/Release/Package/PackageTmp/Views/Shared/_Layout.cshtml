@@ -6,7 +6,7 @@
     <title>@ViewBag.Title-Software information</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top"  >
@@ -24,16 +24,18 @@
                         @Html.ActionLink("AppBook", "Index", "Applications", new { area = "" }, new { @class = "navbar-brand pull-right " })
                     </b>
                 </div>
-                </div>
+              </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Applications", "Index", "Applications")</li>
                     <li>@Html.ActionLink("Links", "Index", "Links")</li>
                     <li>@Html.ActionLink("Servers", "Index", "Servers")</li>
                     <li>@Html.ActionLink("DBServers", "Index", "DBServers")</li>
-                    <li>@Html.ActionLink("FileShare", "", "")</li>
+                    <li>@Html.ActionLink("FileShare", "Index", "FileShares")</li>
+
+                 
                 </ul>
-                
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>

@@ -12,6 +12,92 @@
 <p>
     @Html.ActionLink("New Link", "Create", null, htmlAttributes: new { @class = "btn btn-primary btn-sm pull-right " })
 </p>
+<script type="text/javascript">
+
+
+    function ShowStatus(   id ,link) {
+        
+      
+        //callback(false);
+    }
+
+
+    $(window).load(function () {
+       
+        $('.rating').each(function (i, row) {
+      
+            var   id=$(this).find('td>span').text().trim();
+            var link= $(this).find('td:eq(2)').text().trim();
+            var row = document.getElementById('Row_' + id);
+            var att = document.createAttribute("data-toggle");
+            att.value = "modal";
+            var att1 = document.createAttribute("data-target");
+            att1.value = "#myModal";
+            checkWebsite(link, id, att);
+          
+
+        });
+
+        function checkWebsite(link, id, att)
+        {
+            $.ajax({
+                url: link,
+                type: 'GET',
+                crossDomain: true, async: true,
+             dataType: 'jsonp',
+               contentType: "application/html; charset=UTF-8",
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'cache-control': 'no-cache'
+                },
+                statusCode: {
+                    200: function (response) {
+                        document.getElementById('Status_' + id).innerHTML = "<img src='../img/up.jpg' width='20px' height='20px'/>";
+                      
+                    },
+                    400: function (response) {
+                        document.getElementById('Status_' + id).innerHTML = "<img src='../img/down.jpg' width='20px' height='20px'/>";
+                        document.getElementById('Row_' + id).style = "color:red;font-weight:bold";
+                       
+
+                    },
+                    0: function (response) {
+                        document.getElementById('Status_' + id).innerHTML = "<img src='../img/down.jpg' width='20px' height='20px'/>";
+                        document.getElementById('Row_' + id).style = "color:red;font-weight:bold";
+                        document.getElementById('Row_' + id).setAttributeNode(att);
+                      
+
+                    }
+
+                },
+                errors: function(){
+                   document.getElementById('Status_' + id).innerHTML = "<img src='img/down.jpg' width='20px' height='20px'/>";
+            document.getElementById('Row_' + id).style = "color:red;font-weight:bold";
+            document.getElementById('Row_' + id).setAttributeNode(att);
+            }
+
+            });
+
+
+        }
+        var res=  $('tr[style]').length;
+        if(res>=1)
+        {
+            $('.modal-body').html("<h4><b>Link:</b><a href='" + $('tr[style]>td:eq( 2 )').text() + "'>" + $('tr[style]>td:eq( 2 )').text() + "</a></h4><h5> This site is down.Please check the site immediately</h5> ");
+            //$('.rating').each(
+            //                         function(){
+            //                            // $('.modal-body').text($(this).html());
+            //                             $('.modal-body').append("<b>" + $('td:eq( 2 )').text() + "</b> This site is down.");
+
+            //                          }
+            //                  ) ;
+            $('#myModal').modal('show');
+        }
+
+    })
+
+</script>
+ 
 <table class="table">
     <tr>
         <th>
@@ -29,12 +115,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Password)
         </th>
-      
+        <th>Availability</th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr id="Row_@Html.DisplayFor(modelItem => item.LinkId)" class="rating">
         <td>
             @Html.DisplayFor(modelItem => item.Application.AppName)
         </td>
@@ -43,7 +129,7 @@
           
         
         </td>
-        <td class="col-lg-3  ">
+        <td class="col-lg-3 name" >
             @Html.DisplayFor(modelItem => item.Link)
             <a href="@Html.DisplayFor(modelItem => item.Link)"  target="_blank" title="Click here" class=" glyphicon  glyphicon-link" > </a> 
         </td>
@@ -53,16 +139,39 @@
         <td>
             @Html.DisplayFor(modelItem => item.Password)
         </td>
-        
+        <td style="text-align:center"><span id="Status_@Html.DisplayFor(modelItem => item.LinkId)"> </span></td>
         <td>
+           <span class="linkid" hidden="hidden">@Html.DisplayFor(modelItem => item.LinkId)</span>
             @Html.ActionLink("Edit", "Edit", new { id=item.LinkId }, htmlAttributes: new { @class = "btn btn-primary btn-sm" })  
             @Html.ActionLink("Details", "Details", new { id=item.LinkId }, htmlAttributes: new { @class = "btn btn-info btn-sm" }) 
             @Html.ActionLink("Delete", "Delete", new { id=item.LinkId }, htmlAttributes: new { @class = "btn btn-danger btn-sm" })
+           
         </td>
+        
     </tr>
+  
 }
-
+ 
 </table>
+
+
+<div class="modal"  id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header  ">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title "  style="color:red;font-weight:bold">Alert</h4>
+            </div>
+            <div class="modal-body ">
+                <p> </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
  
 <div>
     @if (Session["appid"] == null || Session["env"] == null)
@@ -73,3 +182,4 @@
         @Html.ActionLink("Back to List", "Index", "Environments", new { app_id = Convert.ToInt32(Session["appid"].ToString()), env = Session["env"].ToString() }, null)
     }
 </div>
+ 

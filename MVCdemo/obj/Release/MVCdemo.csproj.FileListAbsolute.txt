@@ -66,3 +66,10 @@ C:\Users\ue\Documents\Example\MVCdemo\MVCdemo\MVCdemo\bin\Microsoft.Owin.Securit
 C:\Users\ue\Documents\Example\MVCdemo\MVCdemo\MVCdemo\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\ue\Documents\Example\MVCdemo\MVCdemo\MVCdemo\obj\Release\MVCdemo.dll
 C:\Users\ue\Documents\Example\MVCdemo\MVCdemo\MVCdemo\obj\Release\MVCdemo.pdb
+C:\Users\ue\Documents\Example\MVCdemo\MVCdemo\MVCdemo\bin\AWSSDK.Core.dll
+C:\Users\ue\Documents\Example\MVCdemo\MVCdemo\MVCdemo\bin\AWSSDK.S3.dll
+C:\Users\ue\Documents\Example\MVCdemo\MVCdemo\MVCdemo\bin\AWSSDK.Core.pdb
+C:\Users\ue\Documents\Example\MVCdemo\MVCdemo\MVCdemo\bin\AWSSDK.Core.xml
+C:\Users\ue\Documents\Example\MVCdemo\MVCdemo\MVCdemo\bin\AWSSDK.S3.pdb
+C:\Users\ue\Documents\Example\MVCdemo\MVCdemo\MVCdemo\bin\AWSSDK.S3.xml
+C:\Users\ue\Documents\Example\MVCdemo\MVCdemo\MVCdemo\obj\Release\MVCdemo.csprojResolveAssemblyReference.cache

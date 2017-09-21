@@ -8,7 +8,7 @@ namespace MVCdemo
     {
         public void Configuration(IAppBuilder app)
         {
-            
+            ConfigureAuth(app);
         }
     }
 }
